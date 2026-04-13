@@ -6,7 +6,6 @@ import br.com.fiap.api_rest.dto.ProdutoResponse;
 import br.com.fiap.api_rest.model.Produto;
 import br.com.fiap.api_rest.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,7 +39,7 @@ public class ProdutoController {
         return new ResponseEntity<>(produtoSalvo, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Busca um produto por id")
+    @Operation(summary = "Busca um prouto por id")
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoResponse> readProduto(@PathVariable UUID id) {
         ProdutoResponse produto = produtoService.read(id);
@@ -50,17 +49,18 @@ public class ProdutoController {
         return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 
-    @Operation(summary = "Busca todos os produtos ")
+    @Operation(summary = "Busca produtos por página")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                        description = "Página de produtos retornada com sucesso!",
-                        content = @Content(mediaType = "application/json",
-                                           schema = @Schema(implementation = ProdutoLista.class)
-                        )
+                    description = "Página de produtos retornada com sucesso!",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProdutoLista.class)
+                    )
             ),
             @ApiResponse(responseCode = "404",
-                        description = "Nenhum produto encontrado.",
-                        content = @Content(schema = @Schema())
+                    description = "Nenhum produto encontrado",
+                    content = @Content(schema = @Schema())
+
             )
     })
     @GetMapping
