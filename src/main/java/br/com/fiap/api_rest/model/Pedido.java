@@ -1,21 +1,30 @@
 package br.com.fiap.api_rest.model;
 
-import ch.qos.logback.core.status.Status;
+import br.com.fiap.api_rest.model.enums.StatusPedido;
 import jakarta.persistence.*;
-import org.hibernate.mapping.Join;
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "tb_pedidos")
 public class Pedido {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id_pedido")
     private UUID id;
-    private Status status;
-    private LocalDateTime data;
-    private double valor;
+
+    @Column(name = "dt_pedido")
+    private LocalDate data;
+
+    @Column(name = "vl_pedido")
+    private int valor;
+
+    @Column(name = "status_pedido")
+    private StatusPedido status;
+
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
@@ -33,28 +42,28 @@ public class Pedido {
         this.id = id;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public double getValor() {
+    public int getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
     }
 
     public Cliente getCliente() {

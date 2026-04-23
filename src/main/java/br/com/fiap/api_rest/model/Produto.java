@@ -1,5 +1,6 @@
 package br.com.fiap.api_rest.model;
 
+import br.com.fiap.api_rest.model.enums.Categoria;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -32,11 +33,12 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nome, BigDecimal preco, LocalDate expiracao, Categoria categoria) {
+    public Produto(String nome, BigDecimal preco, LocalDate expiracao, Categoria categoria, int estoque) {
         this.nome = nome;
         this.preco = preco;
         this.expiracao = expiracao;
         this.categoria = categoria;
+        this.estoque = estoque;
     }
 
     public UUID getId() {
@@ -94,6 +96,4 @@ public class Produto {
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
-
-
 }
